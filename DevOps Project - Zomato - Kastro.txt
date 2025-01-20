@@ -74,40 +74,58 @@ Verifiy Trivy installation: trivy --version
 
 8. Install Docker Scout
 Make sure to Login to DockerHub account in browser
-<Follow the process as explained in the video>
+and also login to docker in mobax terminal ..........> docker login -u username i.e., mounika9573 > give passwrd mouni@1234 > 
+curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin    >>>>>>>>>>>> it will give errors that no permissions >>>>>>>>>>>>switch to super user >sudo su >again give same curl command > success
+give permission to docker scout to execute the file > sudo chmod 777 /var/run/docker.sock 
 
-9. Install SonarQube using Docker
+
+9. Install SonarQube using Docker (it will go to docker hub account and fetch the required image )
 $ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+$docker images
 $ docker ps (You can see SonarQube container)
-
-<Follow the process as explained in the video>
+access sonar qube >public ip:9000 > default pswrd and uname = admin > change pswrd to mouni > login as admin and mouni > use sonarqube dashboard  
 
 10. Installation of Plugins in Jenkins
 Install below plugins:
-<Follow the process as explained in the video>
-
-11. SonarQube configuration in Jenkins
-<Follow the process as explained in the video>
-
-11.1. Tools Configuration in Jenkins
-<Follow the process as explained in the video>
+go to jenkins dashboard > manage jenkins > available plugins > 
+Pipeline: Stage View,  Eclipse Temurin installer , sonarqube scanner , docker > docker commons > docker pipeline > docker API > docker -build -step ,
+ email extension template , owasp , nodeJS , prometheus metrics . (install all)  jenkins u and p give and accesss 
 
 11.2. Configuration of SonarQube Token in Jenkins
-<Follow the process as explained in the video>
+go to sonarqube dashboard >  adminstartion > security > users > three dot name and expiry time  create
+
+11.1. Tools Configuration in Jenkins
+go to jenkins dashboard >  manage jenkins > tools  > see notebook clearly mentioned in notebook NICOBAR PIGEON
+
+11. SonarQube configuration in Jenkins
+COPY Sonarqube token  
+manage jenkins > security > credentials > global > add credentials >
+kind = secret text ,secret = copy token 
+ID and Description = Sonar-token      ...........create                                       ONCE YOU RUN THE PIPELINE JENKINS WILL TAKE SONAR CREDENTIALS AND DO CODE ANALYSIS.
 
 Lets create another credentials for DockerHub. This is being done because, as soon as the docker image is created, it should get pushed to dockerhub. 
-<Follow the process as explained in the video>
+manage jenkins > security > credentials > global > add credentials > Usename with password >  mounika9573 and mouni@1234 > ID and Description = docker > create
 
 11.3 Configuration of Email notification in Jenkins
 As soon as the build happens, i need to get an email notification to do that we have to configure our email.
-<Follow the process as explained in the video>
+manage jenkins > security > credentials > global > add credentials > Usename with password > saimounikamouni1234@gmail.com and mjhgikljoplkyuhj > ID and Description = email-creds >create
 
 
-12. System Configuration in Jenkins
-<Follow the process as explained in the video>
+12. System Configuration in Jenkins (adding sonar url and email )
+jenkins dashbord> manage jenkins > system >   
+under SonarQube Servers  : add SonarQube > sonar-server > url of sonar dashboard till 9000 > take token from dropdown 
+
+under Extended Email Notification : smtp.gmail.com , port = 465 
+credentials > email and credentials from dropdown     >enable  use SSL and Use OAuth 2.0
+Email Notification > smtp.gmail.com> advanced> Use SMTP auth >email id and pswrd (gmail token 12 digit )  >enable  use SSL > port =465 > reply to add = give email > UTF -8
+enable test configuration by sending test email > email (test)
+ ctrl +F  > default triggers > always and failure-any and success       APPLY AND SAVE
+
 
 13. Create webhook in SonarQube
-<Follow the process as explained in the video>
+GO to sonarqube dashborad>webhook>create>jenkins(name) and jenkins url 
+example : https://54.199.175.239:8080/sonarqube-webhook/   ****
+ create 
 
 14. Create Pipeline Job
 Before pasting the pipeline script, do the following changes in the script
