@@ -334,7 +334,7 @@ http://<your-server-ip>:9090
 
 If it doesn't work, in the web link of browser, remove 's' in 'https'. Keep only 'http' and now you will be able to see.
 You can see the Prometheus console.
-Click on 'Status' dropdown ---> Click on 'Targets' ---> You can see 'Prometheus (1/1 up)'
+Click on 'Status' dropdown --->  Click on 'Targets' ---> You can see 'Prometheus (1/1 up)'
 --------------------------------------------------
 15.3. Installing Node Exporter 
 --------------------------------------------------
@@ -394,7 +394,11 @@ Integrate Jenkins with Prometheus to monitor the CI/CD pipeline.
 Prometheus Configuration:
 
 To configure Prometheus to scrape metrics from Node Exporter and Jenkins, you need to modify the prometheus.yml file. 
-The path of prometheus.yml is; cd /etc/prometheus/ ----> ls -l ----> You can see the "prometheus.yml" file ----> sudo vi prometheus.yml ----> You will see the content and also there is a default job called "Prometheus" Paste the below content at the end of the file;
+The path of prometheus.yml is; 
+cd /etc/prometheus/ ---->
+ls -l ----> You can see the "prometheus.yml" file ---->
+sudo vi prometheus.yml ----> 
+You will see the content and also there is a default job called "Prometheus" Paste the below content at the end of the file;
 
   - job_name: 'node_exporter'
     static_configs:
@@ -436,7 +440,7 @@ sudo apt-get update
 sudo apt-get install -y apt-transport-https software-properties-common
 
 Step 2: Add the GPG Key:
-cd ---> You are now in ~ path
+cd ---> You are now in ~ path (you are in root directory )
 Add the GPG key for Grafana:
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 
@@ -475,12 +479,24 @@ Click on "skip now" (If you want you can create the password)
 
 You will see the Grafana dashboard
 
-The first thing that we have to do in Grafana is to add the data source
-Lets add the data source;
+The first thing that we have to do in Grafana is to add the data source/connections
+Lets add the data source; 
+prometheus > enable default toggle bar > add prometheus url and clcik ok ...............................IT SHOULD SHOW SUCCESSFULLY CONNECTED.
 
-<Follow the process as explained in the video>
 
-Click on Dashboards in the left pane, you can see both the dashboards you have just added.
+Click on Dashboards in the left pane, you can see both the dashboards you have just added.(you need to add 2 dashboards one for grafana node exporter and other is jenkins dashboard )
+1.Grafana node exporter dashboard : .... on new browser https://grafana.com/grafana/dashboards/1860-node-exporter-full/ > copy to clipboard 
+import dashboard (top right you can see) 
+paste the data ( copy to clipboard) 
+LOAD 
+Dahsboard > select prometheus> Import 
+2.Grafana Jenkins dashboard :    https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/
+import dashboard (top right you can see) 
+paste the data ( copy to clipboard) 
+LOAD 
+Dahsboard > select prometheus> Import 
+
+
 
 ---------------------------------------------
 Creation of EKS cluster
