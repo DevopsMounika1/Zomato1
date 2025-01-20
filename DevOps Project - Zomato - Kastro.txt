@@ -263,7 +263,7 @@ MONITORING OF APPLICATION
 15. Launch VM (Name: Monitoring Server, Ubuntu 24.04, t2.large, Select the SG created in the Step 1, EBS: 30GB)
 We will install Grafana, Prometheus, Node Exporter in the above instance and then we will monitor
 --------------------------------------------------
-15.1. Connect to 'Monitoring Server' VM
+15.1. Connect to 'Monitoring Server' VM  > change to root user by sudo su 
 --------------------------------------------------
 
 --------------------------------------------------
